@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: online-shop-app
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/Sidharth77777/argocd-demos.git    
+    targetRevision: main                   # branch
+    path: declarative_approach/online_shop               # the path to manifest (.yml) files
+  destination:
+    server: https://kubernetes.default.svc                  # To get run: `argocd cluster list`
+    namespace: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    
